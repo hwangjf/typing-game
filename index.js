@@ -4,8 +4,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const container = document.getElementById("container");
 
+    let intervalFn;
     let counterKeystroke = 0;
     let correctStrokeCnt = 0;
+
+    let timerCount = 10;
+    let flag = true;
+
+
+    function startClock() {
+         intervalFn = setInterval(handleInterval, 1000);
+    }
+
+    function handleInterval() {
+        const clockDiv = document.getElementById("clock")
+        clockDiv.innerText = --timerCount;
+    }
+
+    function disableInterval() {
+        clearInterval(intervalFn);
+    }
+
+    function displayClock(){
+        let clockDiv = document.createElement("div");
+        clockDiv.id = "clock";
+        clockDiv.style.backgroundColor = "black";
+        clockDiv.style.margin = "auto";
+        clockDiv.style.fontSize = '50px';
+        clockDiv.style.color = 'white';
+
+        clockDiv.style.width = '100px';
+        clockDiv.style.height = '60px';
+        clockDiv.style.textAlign = "center";
+
+        clockDiv.innerText = timerCount;
+        document.body.prepend(clockDiv);
+
+    }
 
 
     function displayText() {
@@ -27,16 +62,21 @@ document.addEventListener("DOMContentLoaded", function() {
         displayAcc.id = "display-accuracy";
         container.appendChild(displayAcc);
 
+        
+        document.addEventListener('keydown', event => {
+            if(event.target.tagName === "TEXTAREA" && flag === true){
+                startClock(event);
+                flag = false;
+            }
+            });// document.addEventListener
+
 
         inputForm.addEventListener('keyup', event => {
             if ((event.which <= 90 && event.which >= 48) || (event.which <= 222 && event.which >= 186) || event.which === 32 ){
                 counterKeystroke ++;
-
                 startTest(event,displayAcc);
             }else{ console.log(event.target)}
         })//inputForm.addEventListener
-
-
 
     }
 
@@ -44,6 +84,15 @@ document.addEventListener("DOMContentLoaded", function() {
         let currentText = event.target.value;
         let index = currentText.length -1;
         // debugger;
+        console.log(timerCount);
+        if(timerCount < 1){
+            alert("Time out!")
+            timerCount = 0;
+            event.target.disabled = true;
+            disableInterval();
+        }
+
+
         if (container.innerText[index] === currentText[index]){
             document.body.style.backgroundColor = 'green';
             correctStrokeCnt ++;
@@ -53,10 +102,10 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(counterKeystroke);
         console.log(correctStrokeCnt);
 
-        displayAcc.innerText = `${(correctStrokeCnt/counterKeystroke).toFixed(2)*100}%`;
+        displayAcc.innerText = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`;
 
     }
-
+    displayClock();
     displayText();
 
 })

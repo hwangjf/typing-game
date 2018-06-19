@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let intervalFn;
     let counterKeystroke = 0;
     let correctStrokeCnt = 0;
+    let wpm;
 
     let timerCount = 10;
     let flag = true;
@@ -37,17 +38,23 @@ document.addEventListener("DOMContentLoaded", function() {
     function pageSetUp() {
       console.log(user)
       container.innerHTML = ""
+      if (document.getElementById('clock')) {
+        document.getElementById('clock').remove();
+      }
+      timerCount = 10;
       displayClock();
       displayText();
     }
 
     function startClock() {
          intervalFn = setInterval(handleInterval, 1000);
+         setTimeout(stopClock, 10000)
     }
 
     function handleInterval() {
         const clockDiv = document.getElementById("clock")
         clockDiv.innerText = --timerCount;
+
     }
 
     function disableInterval() {
@@ -113,13 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let currentText = event.target.value;
         let index = currentText.length -1;
         // debugger;
-        console.log(timerCount);
-        if(timerCount < 1){
-            alert("Time out!")
-            timerCount = 0;
-            event.target.disabled = true;
-            disableInterval();
-        }
+        // console.log(timerCount);
 
 
         if (container.innerText[index] === currentText[index]){
@@ -128,13 +129,48 @@ document.addEventListener("DOMContentLoaded", function() {
         }else{
             document.body.style.backgroundColor = 'red';
         }
-        console.log(counterKeystroke);
-        console.log(correctStrokeCnt);
+        // console.log(counterKeystroke);
+        // console.log(correctStrokeCnt);
 
         displayAcc.innerText = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`;
 
     }
 
+    function stopClock() {
+          // if (timerCount < 1){
+          let inputForm = document.getElementById('inputTxt')
+          const clockDiv = document.getElementById("clock")
+          // timerCount = 0;
+          clockDiv.innerText = 0;
+          let wordArray = inputForm.value.trim().split(' ')
+          if (clockDiv.innerText == 0) {
+            endOfGameAlert(wordArray)
+          }
+          // event.target.disabled = true;
+          disableInterval();
+        // }
+    }
+
+    function endOfGameAlert(wordArray) {
+      // alert(`Time out! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordArray.length * 2} words per minute.`)
+      let typingAccuracy = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`
+      let wordsPerMin = `${wordArray.length * 6}`
+      container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordArray.length * 6} words per minute.</h3><button id="play-again">Play again?</button></div>`
+
+      let playAgainButton = document.getElementById('play-again')
+      playAgainButton.addEventListener('click', pageSetUp)
+
+      let config = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({accuracy: typingAccuracy, wpm: wordsPerMin, user_id: user.id})
+      }
+
+      fetch('http://0.0.0.0:3000/api/v1/games', config).then(resp=>resp.json()).then(console.log)
+    }
+
     getUserName()
+    // pageSetUp()
+
 
 })

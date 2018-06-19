@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let correctStrokeCnt = 0;
   let wpm;
 
-  let timerCount = 10;
+  let timerCount = 100;
   let flag = true;
   let user;
   let usersArray = [];
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function startClock() {
     intervalFn = setInterval(handleInterval, 1000);
-    setTimeout(stopClock, 10000)
+    setTimeout(stopClock, 100000)
   }
 
   function handleInterval() {
@@ -124,7 +124,19 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function displayText() {
-    container.innerText = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
+    let p = document.createElement('P');
+    let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
+    // debugger
+    let counter = 0;
+    [...text].forEach(char => {
+
+      let t = document.createElement('SPAN')
+      t.dataset.id = counter
+      t.innerText = (char)
+      p.appendChild(t)
+      counter++
+    });
+    container.appendChild(p);
     container.innerHTML += "<br>";
     let inputForm = document.createElement("textarea");
     inputForm.type = 'text';
@@ -145,23 +157,33 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });// document.addEventListener
 
+    let pArray = Array.from(document.getElementsByTagName('P')[0].children)
     inputForm.addEventListener('keyup', event => {
+      console.log(`which is `, event.which)
       if ((event.which <= 90 && event.which >= 48) || (event.which <= 222 && event.which >= 186) || event.which === 32 ){
         counterKeystroke ++;
-        startTest(event,displayAcc);
-      } else {console.log(event.target)}
+        startTest(event,displayAcc,pArray);
+      }
     })//inputForm.addEventListener
   }
 
-  function startTest(event,displayAcc) {
+  function startTest(event,displayAcc,p) {
     let currentText = event.target.value;
+    console.log(`currentText is ${currentText}`)
     let index = currentText.length -1;
-
-    if (container.innerText[index] === currentText[index]){
-      document.body.style.backgroundColor = 'green';
-      correctStrokeCnt ++;
+    //console.log(p)
+    console.log(`The inserted letter is ${currentText[index]}`)
+    console.log(`The letter above is ${p[index].innerText}`)
+    //debugger
+    if (p[index].innerText === currentText[index]){
+      console.log(`The letter matches`)
+      p[index].style.color = 'green';
+      p[index].style.fontSize = '40px';
+      correctStrokeCnt++;
     } else {
-      document.body.style.backgroundColor = 'red';
+      console.log(`The letter did not matche`)
+      p[index].style.color = 'red';
+      p[index].style.fontSize = '40px';
     }
     displayAcc.innerText = `Accuracy: ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`;
   }

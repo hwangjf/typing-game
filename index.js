@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let counterKeystroke = 0;
     let correctStrokeCnt = 0;
 
-    let timerCount = 10;
+    let timerCount = 5;
     let flag = true;
 
 
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function displayText() {
         container.innerText = oneStepAtTheTime[0];
         container.innerHTML += "<br>"; 
+        container.style.fontSize = '30px'
         let inputForm = document.createElement("textarea");
         inputForm.type = 'text';
         // inputForm.rows = "6";

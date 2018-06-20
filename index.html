@@ -5,11 +5,33 @@
 
     <title>Ultime Typing Test</title>
 
+
+    <style>
+        /* position:relative and overflow:hidden are required */
+        #scroller { position:relative; overflow:hidden; width:100%; border:1px solid black; }
+    
+        /* add formatting for the scrolling text */
+        #tag { margin:10px 0; }
+    
+        /* #testP must also contain all text-sizing properties of #tag  */
+        #testP { visibility:hidden; position:absolute; white-space:nowrap; } 
+    
+        /* used as a page top marker and to limit width */
+        /* #top { width:550px; margin:auto; } */
+            
+    </style>
+
     <script src="index.js"></script>
 </head>
 <body>
 
-    <div id="container"></div>
+
+    <div id="container">
+
+
+
+
+    </div>
 
     <div id="leaderboard">
     </div>

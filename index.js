@@ -89,15 +89,22 @@ document.addEventListener("DOMContentLoaded", function() {
     if (document.getElementById('clock')) {
       document.getElementById('clock').remove();
     }
-    timerCount = 10;
+    timerCount = 30;
     displayClock();
+
+    initScroller();
+
     displayText();
     requestGames();
+
+    ///////////////
+    
+
   }
 
   function startClock() {
     intervalFn = setInterval(handleInterval, 1000);
-    setTimeout(stopClock, 100000)
+    setTimeout(stopClock, timerCount*1000)
   }
 
   function handleInterval() {
@@ -126,19 +133,25 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function displayText() {
-    let p = document.createElement('P');
-    let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
-    // debugger
-    let counter = 0;
-    [...text].forEach(char => {
+    // let p = document.createElement('P');
+    // let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
+    // // debugger
+    // let counter = 0;
+    // [...text].forEach(char => {
 
-      let t = document.createElement('SPAN')
-      t.dataset.id = counter
-      t.innerText = (char)
-      p.appendChild(t)
-      counter++
-    });
-    container.appendChild(p);
+    //   let t = document.createElement('SPAN')
+    //   t.dataset.id = counter
+    //   t.innerText = (char)
+    //   p.appendChild(t)
+    //   counter++
+    // });
+
+    // initScroller();
+    // document.addEventListener('keyup',typingInterval);
+
+
+    // container.appendChild(p);
+
     container.innerHTML += "<br>";
     let inputForm = document.createElement("textarea");
     inputForm.type = 'text';
@@ -162,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let pArray = Array.from(document.getElementsByTagName('P')[0].children)
 
     inputForm.addEventListener('keyup', event => {
-
+        typingInterval();
     //   console.log(`which is `, event.which)
       if ((event.which <= 90 && event.which >= 48) || (event.which <= 222 && event.which >= 186) || event.which === 32 ){
         counterKeystroke ++;
@@ -206,11 +219,11 @@ document.addEventListener("DOMContentLoaded", function() {
     [...currentText].forEach(e => {
         if (p[index].innerText === e){
             p[index].style.color = 'green';
-            p[index].style.fontSize = '40px';
+            p[index].style.fontSize = '30px';
             counter ++;
           } else {
             p[index].style.color = 'red';
-            p[index].style.fontSize = '40px';
+            p[index].style.fontSize = '30px';
           }
         index ++;
     })
@@ -232,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function endOfGameAlert(wordArray) {
     let typingAccuracy = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`
-    let wordsPerMin = `${wordArray.length * 6}`
+    let wordsPerMin = `${wordArray.length * 2}`
     container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordArray.length * 6} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again">Play again?</button></div>`
 
     let playAgainButton = document.getElementById('play-again')
@@ -247,5 +260,100 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('http://0.0.0.0:3000/api/v1/games', config).then(resp=>resp.json()).then(console.log)
   }
 
-  getUserName()
+  getUserName();
+
+
+
+
+  /////////////////
+
+
+  var speed=9        // speed of scroller
+var step=1          // smoothness of movement
+
+
+var x, scroll, divW, sText=""
+
+function stopScroller(){clearTimeout(scroll)}
+
+function startScroller(){
+  document.getElementById('tag').style.whiteSpace='nowrap'
+  var p=document.createElement('p')
+  p.id='testP'
+  p.style.fontSize='25%' //fix for mozilla. multiply by 4 before using
+  x-=step
+  if (document.getElementById('tag').className) p.className=document.getElementById('tag').className
+  p.appendChild(document.createTextNode(sText))
+  document.body.appendChild(p)
+  pw=p.offsetWidth
+  document.body.removeChild(p)
+  if (x<(pw*4)*-1){x=divW}
+  document.getElementById('tag').style.left=x+'px'
+  scroll=setTimeout(startScroller,speed)
+}
+
+function initScroller(){
+
+    test();
+
+    document.getElementById('tag').style.whiteSpace='nowrap'
+
+  if (document.getElementById && document.createElement && document.body.appendChild) {
+    // addControls();
+    divW=document.getElementById('scroller').offsetWidth;
+    x=divW - 150;
+    document.getElementById('tag').style.position='relative';
+    document.getElementById('tag').style.left=divW+'px';
+    var ss=document.getElementById('tag').childNodes;
+    // debugger;
+    for (i=0;i<ss.length;i++) {sText+=ss[i].nodeValue+" "};
+    // scroll=setTimeout('startScroller()',speed);
+
+  }
+}
+
+
+function test(){
+    let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
+    let pTag = document.createElement('p');
+    let scrollerDiv = document.createElement('div');
+
+    scrollerDiv.id = "scroller";
+    pTag.id = "tag";
+
+    pTag.style.fontSize = "30px"
+
+    // const p  = document.getElementById("tag");
+    // debugger;
+
+    let counter = 0;
+    [...text].forEach(char => {
+      let t = document.createElement('SPAN')
+      t.dataset.id = counter
+      t.innerText = (char)
+      pTag.appendChild(t)
+      counter++
+
+    });
+
+
+    scrollerDiv.appendChild(pTag);
+    container.appendChild(scrollerDiv);
+}
+
+
+let startOrStop = true;
+
+//moving the line longer or shorter
+function typingInterval(){
+    setTimeout(startAction, 10); //start the scrolling
+    setTimeout(startAction, 200); // stop the scrolling
+}
+
+function startAction() {
+    if(startOrStop){startScroller();startOrStop = false;}
+    else{stopScroller(); startOrStop = true;}
+}
+
+
 })

@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let counterKeystroke = 0;
   let correctStrokeCnt = 0;
   let wpm;
+  let txtSize = "20px";
 
   let timerCount = 100;
   let flag = true;
@@ -175,9 +176,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let pArray = Array.from(document.getElementsByTagName('P')[0].children)
 
     inputForm.addEventListener('keyup', event => {
-        typingInterval();
     //   console.log(`which is `, event.which)
       if ((event.which <= 90 && event.which >= 48) || (event.which <= 222 && event.which >= 186) || event.which === 32 ){
+        // if(flag === true){
+        //     startClock(event);
+        //     flag = false;
+        // }
+        
         counterKeystroke ++;
         startTest(event,displayAcc,pArray);
       }
@@ -188,18 +193,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let currentText = event.target.value;
 
-    // let index = currentText.length -1;
+    let index = currentText.length -1;
     //console.log(p)
 
     //debugger
     // p[index].innerText === currentText[index]
 
-    // if (p[index].innerText === currentText[index]){
+    if (p[index].innerText === currentText[index]){
     //   console.log(`The letter matches`)
     //   p[index].style.color = 'green';
     //   p[index].style.fontSize = '40px';
     //   correctStrokeCnt++;
-    // } 
+    typingInterval();
+
+    } 
     // else {
     // //   console.log(`The letter did not matche`)
     //   p[index].style.color = 'red';
@@ -210,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     displayAcc.innerText = `Accuracy: ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`;
+    
   }
 
 
@@ -219,11 +227,11 @@ document.addEventListener("DOMContentLoaded", function() {
     [...currentText].forEach(e => {
         if (p[index].innerText === e){
             p[index].style.color = 'green';
-            p[index].style.fontSize = '30px';
+            p[index].style.fontSize = txtSize;
             counter ++;
           } else {
             p[index].style.color = 'red';
-            p[index].style.fontSize = '30px';
+            p[index].style.fontSize = txtSize;
           }
         index ++;
     })
@@ -239,6 +247,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let wordArray = inputForm.value.trim().split(' ')
     if (clockDiv.innerText == 0) {
       endOfGameAlert(wordArray)
+      console.log(wordArray);
     }
     disableInterval();
   }
@@ -246,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function endOfGameAlert(wordArray) {
     let typingAccuracy = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`
     let wordsPerMin = `${wordArray.length * 2}`
-    container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordArray.length * 6} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again">Play again?</button></div>`
+    container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordsPerMin} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again">Play again?</button></div>`
 
     let playAgainButton = document.getElementById('play-again')
     playAgainButton.addEventListener('click', pageSetUp)
@@ -268,11 +277,11 @@ document.addEventListener("DOMContentLoaded", function() {
   /////////////////
 
 
-  var speed=9        // speed of scroller
-var step=1          // smoothness of movement
+    var speed=3        // speed of scroller
+    var step=1          // smoothness of movement
 
 
-var x, scroll, divW, sText=""
+    var x, scroll, divW, sText=""
 
 function stopScroller(){clearTimeout(scroll)}
 
@@ -308,6 +317,8 @@ function initScroller(){
     // debugger;
     for (i=0;i<ss.length;i++) {sText+=ss[i].nodeValue+" "};
     // scroll=setTimeout('startScroller()',speed);
+    typingInterval();
+
 
   }
 }
@@ -321,7 +332,7 @@ function test(){
     scrollerDiv.id = "scroller";
     pTag.id = "tag";
 
-    pTag.style.fontSize = "30px"
+    pTag.style.fontSize = txtSize;
 
     // const p  = document.getElementById("tag");
     // debugger;
@@ -347,7 +358,7 @@ let startOrStop = true;
 //moving the line longer or shorter
 function typingInterval(){
     setTimeout(startAction, 10); //start the scrolling
-    setTimeout(startAction, 200); // stop the scrolling
+    setTimeout(startAction, 400); // stop the scrolling
 }
 
 function startAction() {

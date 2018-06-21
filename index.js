@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const USERS_URL = 'http://localhost:3000/api/v1/users'
   const modalDiv = document.getElementById('modal-div')
   let logInNameSpace = "Log In!";
+  let mySound;
+  const bg = "rgb(246, 246, 246)";
 
   const oneStepAtTheTime = [
     "A Waterloo Medal was designed by sculptor Benedetto Pistrucci. Commemorating the Battle of Waterloo (18 June 1815), the medal was commissioned by the British Government in 1819 on the instructions of George IV while Prince Regent; copies were to be presented to the victorious generals and to leaders of Britain's allies. The Prince Regent and William Wellesley-Pole, Master of the Mint, had been impressed by Pistrucci's models, and gave him the commission.",
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
     `Matsumoto stresses that systems design needs to emphasize human, rather than computer, needs: Often people, especially computer engineers, focus on the machines. They think, "By doing this, the machine will run fast. By doing this, the machine will run more effectively. By doing this, the machine will something something something." They are focusing on machines. But in fact we need to focus on humans, on how humans care about doing programming or operating the application of the machines. We are the masters. They are the slaves.`,
     `A space elevator is a proposed type of planet-to-space transportation system. The main component would be a cable (also called a tether) anchored to the surface and extending into space. The design would permit vehicles to travel along the cable from a planetary surface, such as the Earth's, directly into space or orbit, without the use of large rockets. An Earth-based space elevator would consist of a cable with one end attached to the surface near the equator and the other end in space beyond geostationary orbit (35,786 km altitude). The competing forces of gravity, which is stronger at the lower end, and the outward/upward centrifugal force, which is stronger at the upper end, would result in the cable being held up, under tension, and stationary over a single position on Earth. With the tether deployed, climbers could repeatedly climb the tether to space by mechanical means, releasing their cargo to orbit. Climbers could also descend the tether to return cargo to the surface from orbit.`,
     `Alan Mathison Turing was an English computer scientist, mathematician, logician, cryptanalyst, philosopher, and theoretical biologist. Turing was highly influential in the development of theoretical computer science, providing a formalisation of the concepts of algorithm and computation with the Turing machine, which can be considered a model of a general purpose computer. Turing is widely considered to be the father of theoretical computer science and artificial intelligence.`,
-    `Steven Paul Jobs (February 24, 1955 – October 5, 2011) was an American entrepreneur and business magnate. He was the chairman, chief executive officer (CEO), and a co-founder of Apple Inc., chairman and majority shareholder of Pixar, a member of The Walt Disney Company's board of directors following its acquisition of Pixar, and the founder, chairman, and CEO of NeXT. Jobs and Apple co-founder Steve Wozniak are widely recognized as pioneers of the microcomputer revolution of the 1970s and 1980s.`,
+    `Steven Paul Jobs was an American entrepreneur and business magnate. He was the chairman, chief executive officer (CEO), and a co-founder of Apple Inc., chairman and majority shareholder of Pixar, a member of The Walt Disney Company's board of directors following its acquisition of Pixar, and the founder, chairman, and CEO of NeXT. Jobs and Apple co-founder Steve Wozniak are widely recognized as pioneers of the microcomputer revolution of the 1970s and 1980s.`,
     `Mammals (class Mammalia) are vertebrate animals characterized by the presence of sweat glands, including milk producing sweat glands, and by the presence of: hair, three middle ear bones used in hearing, and a neocortex region in the brain. Mammals, other than the monotremes, give birth to live young instead of laying eggs. They also possess specialized teeth and use a placenta in the ontogeny. The mammalian brain regulates endothermic and circulatory systems, including a four-chambered heart. Mammals encompass approximately 5,400 species, ranging in size from the Bumblebee Bat, (30-40mm), to the Blue Whale, (33,000mm), distributed in about 1,200 genera, 153 families, and 29 orders, though this varies by classification scheme.`
   ]
 
@@ -40,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log('this is request Games')
     let h1 = document.createElement('H1')
     h1.innerText = "Leaderboard"
+    h1.style.textAlign = "center"
 
     leaderBoard.appendChild(h1)
 
@@ -61,20 +64,21 @@ document.addEventListener("DOMContentLoaded", function() {
       gamesArray.forEach(gameObj => {
         let userInstance = usersArray.find(user => user.id === gameObj.user_id)
         let li = document.createElement('LI')
-        li.innerText = `${userInstance.name} | Accuracy: ${gameObj.accuracy} | WPM: ${gameObj.wpm} | Score: ${parseInt(gameObj.accuracy)*parseInt(gameObj.wpm)}`
+        li.innerHTML = `<strong>${userInstance.name}</strong> | Accuracy: ${gameObj.accuracy} | WPM: ${gameObj.wpm} | Score: ${parseInt(gameObj.accuracy)*parseInt(gameObj.wpm)}`
 
-        ol.appendChild(li)
+        if (ol.children.length < 10 ) {
+          ol.appendChild(li)
+        }
+        // if (ol.children.length > 9 ) {
+        //   leaderBoard.appendChild(ol);
+        //   break;
+        // }
       })
     })
+    ol.className = "ol-class"
     leaderBoard.appendChild(ol)
+    // leaderBoard.style.padding="10px;"
   }
-
-  // function getUserName() {
-  //   // container.innerHTML += `Please Enter Your Name: <input id="name-input-field" type="text">
-  //   // <button id="name-submit" type="submit">Submit</button>`
-  //   // let submitButton = document.getElementById('name-submit')
-  //   // submitButton.addEventListener('click', userPostRequest)
-  // }
 
   function usersGetRequest() {
     return fetch(USERS_URL).then(resp=>resp.json())
@@ -112,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
     flag = true;
     counterKeystroke = 0;
     correctStrokeCnt = 0;
+    mySound = new sound("sounds/tw_sound.mp3");
 
     displayClock();
 
@@ -142,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function() {
             Please enter your name: <input id="name-input-field" type="text"
           </div>
           <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
             <button type="button" id="submitName" class="btn btn-secondary" data-dismiss="modal">Submit Name</button>
           </div>
         </div>
@@ -175,7 +179,9 @@ document.addEventListener("DOMContentLoaded", function() {
     clockDiv.style.backgroundColor = "black";
     clockDiv.style.margin = "auto";
     clockDiv.style.fontSize = '50px';
-    clockDiv.style.color = 'white';
+    clockDiv.style.color = bg;
+    clockDiv.style.fontFamily = "'Orbitron', sans-serif";
+    clockDiv.style.color = "rgb(224, 88, 88)"
 
     clockDiv.style.width = '100px';
     clockDiv.style.height = '70px';
@@ -183,29 +189,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     clockDiv.innerText = timerCount;
     clockContainer.prepend(clockDiv);
-    // let br = document.createElement('BR')
-    // clockDiv.innerHTML += '<br>'
   }
 
   function displayText() {
-    // let p = document.createElement('P');
-    // let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
-    // // debugger
-    // let counter = 0;
-    // [...text].forEach(char => {
-
-    //   let t = document.createElement('SPAN')
-    //   t.dataset.id = counter
-    //   t.innerText = (char)
-    //   p.appendChild(t)
-    //   counter++
-    // });
-
-    // initScroller();
-    // document.addEventListener('keyup',typingInterval);
-
-
-    // container.appendChild(p);
     console.log('this is display Text')
     container.innerHTML += "<br>";
     let inputForm = document.createElement("textarea");
@@ -217,8 +203,10 @@ document.addEventListener("DOMContentLoaded", function() {
     container.appendChild(inputForm);
     if (logInNameSpace === "Log In!") {
       inputForm.disabled = true;
+      inputForm.placeholder = "Please log in."
     } else {
       inputForm.disabled = false;
+      inputForm.placeholder = "Start typing here!"
     }
 
     let displayAcc = document.createElement("div");
@@ -235,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let pArray = Array.from(document.getElementsByTagName('P')[0].children)
 
     inputForm.addEventListener('keyup', event => {
-    //   console.log(`which is `, event.which)
+      mySound.play()
       if ((event.which <= 90 && event.which >= 48) || (event.which <= 222 && event.which >= 186) || event.which === 32 ){
         // if(flag === true){
         //     startClock(event);
@@ -253,17 +241,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentText = event.target.value;
 
     let index = currentText.length -1;
-    //console.log(p)
-
-
-    //debugger
-    // p[index].innerText === currentText[index]
 
     if (p[index].innerText === currentText[index]){
-    //   console.log(`The letter matches`)
-    //   p[index].style.color = 'green';
-    //   p[index].style.fontSize = '40px';
-    //   correctStrokeCnt++;
       typingInterval();
       if (faster(p[index].offsetLeft)){
        changeSpeed(true);
@@ -272,9 +251,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
     else {
-    // //   console.log(`The letter did not matche`)
-    //   p[index].style.color = 'red';
-    //   p[index].style.fontSize = '40px';
       changeSpeed(false);
 
     }
@@ -287,7 +263,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function faster(offsetLeft) {
-    // let charWidth = 7.3;
     let cutOff = 500;
     let typingPosition = leftPos + offsetLeft;
     if(leftPos != null){
@@ -337,6 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log(wordArray);
     }
     disableInterval();
+    mySound.stop();
   }
 
   function endOfGameAlert(wordArray) {
@@ -356,7 +332,20 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('http://0.0.0.0:3000/api/v1/games', config).then(resp=>resp.json()).then(console.log)
   }
 
-  // getUserName();
+  function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}
   pageSetUp();
   getModal();
 
@@ -418,14 +407,12 @@ function test(){
     let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
     let pTag = document.createElement('p');
     let scrollerDiv = document.createElement('div');
+    scrollerDiv.style.backgroundColor= bg
 
     scrollerDiv.id = "scroller";
     pTag.id = "tag";
 
     pTag.style.fontSize = txtSize;
-
-    // const p  = document.getElementById("tag");
-    // debugger;
 
     let counter = 0;
     [...text].forEach(char => {

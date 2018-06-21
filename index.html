@@ -8,12 +8,15 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Martel" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <style>
         /* position:relative and overflow:hidden are required */
         #scroller { position:relative; overflow:hidden; width:100%; border:1px solid black; }
 
         /* add formatting for the scrolling text */
         #tag { margin:10px 0; }
+
+        .ol-class {padding: 20px; margin: 20px;}
 
         /* #testP must also contain all text-sizing properties of #tag  */
         #testP { visibility:hidden; position:absolute; white-space:nowrap; }
@@ -25,7 +28,7 @@
 
     <script src="index.js"></script>
 </head>
-<body style="background-color: rgb(250, 232, 206">
+<body style="background-color: rgb(215, 215, 215)">
   <div id="modal-div">
   </div>
   <br>
@@ -33,7 +36,7 @@
   <br>
   <div class="jumbotron jumbotron-fluid" style="background-image: url('images/ws_Typewriters_Letters_852x480.jpg'); background-repeat: center no-repeat; background-size: 100%; padding: 100px; opacity: 0.8; filter: alpha(opacity=40);">
     <div class="container" width="100%">
-      <h1 class="display-4" style="text-align: center; color: white; text-shadow: 2px 2px #000000; font-family: 'Martel', serif;" >The Ultimate Typing Test</h1>
+      <h1 class="display-4" style="text-align: center; color: rgb(246, 246, 246); text-shadow: 2px 2px #000000; font-family: 'Martel', serif;" >The Ultimate Typing Test</h1>
       <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
   </div>
 </div>
@@ -46,8 +49,8 @@
 
 
     </div>
-
-    <div id="leaderboard">
+    <br>
+    <div id="leaderboard" class = "container col-sm-6" style="background-color: rgb(246, 246, 246);">
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

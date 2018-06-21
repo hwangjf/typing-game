@@ -2,31 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Ultime Typing Test</title>
+    <title>Ultimate Typing Test</title>
 
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Martel" rel="stylesheet">
     <style>
         /* position:relative and overflow:hidden are required */
         #scroller { position:relative; overflow:hidden; width:100%; border:1px solid black; }
-    
+
         /* add formatting for the scrolling text */
         #tag { margin:10px 0; }
-    
+
         /* #testP must also contain all text-sizing properties of #tag  */
-        #testP { visibility:hidden; position:absolute; white-space:nowrap; } 
-    
+        #testP { visibility:hidden; position:absolute; white-space:nowrap; }
+
         /* used as a page top marker and to limit width */
         /* #top { width:550px; margin:auto; } */
-            
+
     </style>
 
     <script src="index.js"></script>
 </head>
-<body>
-
-
-    <div id="container">
+<body style="background-color: rgb(250, 232, 206">
+  <div id="modal-div">
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="jumbotron jumbotron-fluid" style="background-image: url('ws_Typewriters_Letters_852x480.jpg'); background-repeat: center no-repeat; background-size: 100%; padding: 100px; opacity: 0.8; filter: alpha(opacity=40);">
+    <div class="container" width="100%">
+      <h1 class="display-4" style="text-align: center; color: white; text-shadow: 2px 2px #000000; font-family: 'Martel', serif;" >The Ultimate Typing Test</h1>
+      <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+  </div>
+</div>
+  <div id="clock-container">
+  </div>
+  <br>
+    <div id="container" class="container-fluid">
 
 
 
@@ -36,5 +50,8 @@
     <div id="leaderboard">
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html>

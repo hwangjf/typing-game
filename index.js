@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
   const GAMES_URL = 'http://localhost:3000/api/v1/games'
   const USERS_URL = 'http://localhost:3000/api/v1/users'
+  const modalDiv = document.getElementById('modal-div')
+  let logInNameSpace = "Log In!";
 
-
- 
   const oneStepAtTheTime = [
     "A Waterloo Medal was designed by sculptor Benedetto Pistrucci. Commemorating the Battle of Waterloo (18 June 1815), the medal was commissioned by the British Government in 1819 on the instructions of George IV while Prince Regent; copies were to be presented to the victorious generals and to leaders of Britain's allies. The Prince Regent and William Wellesley-Pole, Master of the Mint, had been impressed by Pistrucci's models, and gave him the commission.",
     `Augusta Ada King-Noel, Countess of Lovelace was an English mathematician and writer, chiefly known for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine. She was the first to recognize that the machine had applications beyond pure calculation, and published the first algorithm intended to be carried out by such a machine. As a result, she is sometimes regarded as the first to recognize the full potential of a "computing machine" and the first computer programmer.`,
     `JavaScript, often abbreviated as JS, is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm. Alongside HTML and CSS, JavaScript is one of the three core technologies of the World Wide Web. JavaScript enables interactive web pages and thus is an essential part of web applications. The vast majority of websites use it, and all major web browsers have a dedicated JavaScript engine to execute it.`,
     `Matsumoto stresses that systems design needs to emphasize human, rather than computer, needs: Often people, especially computer engineers, focus on the machines. They think, "By doing this, the machine will run fast. By doing this, the machine will run more effectively. By doing this, the machine will something something something." They are focusing on machines. But in fact we need to focus on humans, on how humans care about doing programming or operating the application of the machines. We are the masters. They are the slaves.`,
-    `A space elevator is a proposed type of planet-to-space transportation system.[1] The main component would be a cable (also called a tether) anchored to the surface and extending into space. The design would permit vehicles to travel along the cable from a planetary surface, such as the Earth's, directly into space or orbit, without the use of large rockets. An Earth-based space elevator would consist of a cable with one end attached to the surface near the equator and the other end in space beyond geostationary orbit (35,786 km altitude). The competing forces of gravity, which is stronger at the lower end, and the outward/upward centrifugal force, which is stronger at the upper end, would result in the cable being held up, under tension, and stationary over a single position on Earth. With the tether deployed, climbers could repeatedly climb the tether to space by mechanical means, releasing their cargo to orbit. Climbers could also descend the tether to return cargo to the surface from orbit.`,
+    `A space elevator is a proposed type of planet-to-space transportation system. The main component would be a cable (also called a tether) anchored to the surface and extending into space. The design would permit vehicles to travel along the cable from a planetary surface, such as the Earth's, directly into space or orbit, without the use of large rockets. An Earth-based space elevator would consist of a cable with one end attached to the surface near the equator and the other end in space beyond geostationary orbit (35,786 km altitude). The competing forces of gravity, which is stronger at the lower end, and the outward/upward centrifugal force, which is stronger at the upper end, would result in the cable being held up, under tension, and stationary over a single position on Earth. With the tether deployed, climbers could repeatedly climb the tether to space by mechanical means, releasing their cargo to orbit. Climbers could also descend the tether to return cargo to the surface from orbit.`,
     `Alan Mathison Turing was an English computer scientist, mathematician, logician, cryptanalyst, philosopher, and theoretical biologist. Turing was highly influential in the development of theoretical computer science, providing a formalisation of the concepts of algorithm and computation with the Turing machine, which can be considered a model of a general purpose computer. Turing is widely considered to be the father of theoretical computer science and artificial intelligence.`,
     `Steven Paul Jobs (February 24, 1955 – October 5, 2011) was an American entrepreneur and business magnate. He was the chairman, chief executive officer (CEO), and a co-founder of Apple Inc., chairman and majority shareholder of Pixar, a member of The Walt Disney Company's board of directors following its acquisition of Pixar, and the founder, chairman, and CEO of NeXT. Jobs and Apple co-founder Steve Wozniak are widely recognized as pioneers of the microcomputer revolution of the 1970s and 1980s.`,
     `Mammals (class Mammalia) are vertebrate animals characterized by the presence of sweat glands, including milk producing sweat glands, and by the presence of: hair, three middle ear bones used in hearing, and a neocortex region in the brain. Mammals, other than the monotremes, give birth to live young instead of laying eggs. They also possess specialized teeth and use a placenta in the ontogeny. The mammalian brain regulates endothermic and circulatory systems, including a four-chambered heart. Mammals encompass approximately 5,400 species, ranging in size from the Bumblebee Bat, (30-40mm), to the Blue Whale, (33,000mm), distributed in about 1,200 genera, 153 families, and 29 orders, though this varies by classification scheme.`
@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let flag = true;
   let user;
   let usersArray = [];
+  let userFlag = true;
 
 
   let leftPos = null;
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   function requestGames() {
+    console.log('this is request Games')
     let h1 = document.createElement('H1')
     h1.innerText = "Leaderboard"
 
@@ -67,12 +69,12 @@ document.addEventListener("DOMContentLoaded", function() {
     leaderBoard.appendChild(ol)
   }
 
-  function getUserName() {
-    container.innerHTML += `Please Enter Your Name: <input id="name-input-field" type="text">
-    <button id="name-submit" type="submit">Submit</button>`
-    let submitButton = document.getElementById('name-submit')
-    submitButton.addEventListener('click', userPostRequest)
-  }
+  // function getUserName() {
+  //   // container.innerHTML += `Please Enter Your Name: <input id="name-input-field" type="text">
+  //   // <button id="name-submit" type="submit">Submit</button>`
+  //   // let submitButton = document.getElementById('name-submit')
+  //   // submitButton.addEventListener('click', userPostRequest)
+  // }
 
   function usersGetRequest() {
     return fetch(USERS_URL).then(resp=>resp.json())
@@ -88,6 +90,13 @@ document.addEventListener("DOMContentLoaded", function() {
       body: JSON.stringify({name: nameInput})
     }
     fetch(USERS_URL, config).then(resp=>resp.json()).then(data => user = data).then(pageSetUp)
+    console.log(userFlag)
+    console.log(logInNameSpace)
+    if (userFlag === true) {
+      logInNameSpace = "Change User";
+      userFlag = false;
+      getModal();
+    }
   }
 
   function pageSetUp() {
@@ -96,16 +105,51 @@ document.addEventListener("DOMContentLoaded", function() {
     if (document.getElementById('clock')) {
       document.getElementById('clock').remove();
     }
+
     timerCount = totalTime;
+
+
+    flag = true;
+    counterKeystroke = 0;
+    correctStrokeCnt = 0;
+
     displayClock();
 
     initScroller();
 
     displayText();
     requestGames();
-
     ///////////////
-    
+
+
+  }
+
+  function getModal() {
+    modalDiv.innerHTML = `<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#logInModal" style="position: absolute; right: 0px; width: 120px; margin: 10px; padding: 10px;">
+      ${logInNameSpace}
+    </button>
+
+    <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="ourModalDisplay" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ourModalDisplay">Start Your Engines!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Please enter your name: <input id="name-input-field" type="text"
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            <button type="button" id="submitName" class="btn btn-secondary" data-dismiss="modal">Submit Name</button>
+          </div>
+        </div>
+      </div>
+    </div>`
+    const submitNameButton = document.getElementById('submitName')
+    submitNameButton.addEventListener('click', userPostRequest)
 
   }
 
@@ -124,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function displayClock(){
+    console.log('this is display Clock')
+    let clockContainer = document.getElementById('clock-container')
     let clockDiv = document.createElement("div");
     clockDiv.id = "clock";
     clockDiv.style.backgroundColor = "black";
@@ -132,11 +178,13 @@ document.addEventListener("DOMContentLoaded", function() {
     clockDiv.style.color = 'white';
 
     clockDiv.style.width = '100px';
-    clockDiv.style.height = '60px';
+    clockDiv.style.height = '70px';
     clockDiv.style.textAlign = "center";
 
     clockDiv.innerText = timerCount;
-    document.body.prepend(clockDiv);
+    clockContainer.prepend(clockDiv);
+    // let br = document.createElement('BR')
+    // clockDiv.innerHTML += '<br>'
   }
 
   function displayText() {
@@ -158,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // container.appendChild(p);
-
+    console.log('this is display Text')
     container.innerHTML += "<br>";
     let inputForm = document.createElement("textarea");
     inputForm.type = 'text';
@@ -167,6 +215,11 @@ document.addEventListener("DOMContentLoaded", function() {
     inputForm.style.fontSize = "20px";
     inputForm.id = "inputTxt";
     container.appendChild(inputForm);
+    if (logInNameSpace === "Log In!") {
+      inputForm.disabled = true;
+    } else {
+      inputForm.disabled = false;
+    }
 
     let displayAcc = document.createElement("div");
     displayAcc.id = "display-accuracy";
@@ -188,8 +241,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //     startClock(event);
         //     flag = false;
         // }
-        // typingInterval();
-        
+
         counterKeystroke ++;
         startTest(event,displayAcc,pArray);
       }
@@ -218,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         changeSpeed(false);
       }
-    } 
+    }
     else {
     // //   console.log(`The letter did not matche`)
     //   p[index].style.color = 'red';
@@ -231,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     displayAcc.innerText = `Accuracy: ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`;
-    
+
   }
 
   function faster(offsetLeft) {
@@ -290,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function endOfGameAlert(wordArray) {
     let typingAccuracy = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`
     let wordsPerMin = `${wordArray.length * 2}`
-    container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordsPerMin} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again">Play again?</button></div>`
+    container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordsPerMin} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again" class="btn btn-secondary">Play again?</button></div>`
 
     let playAgainButton = document.getElementById('play-again')
     playAgainButton.addEventListener('click', pageSetUp)
@@ -304,7 +356,9 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('http://0.0.0.0:3000/api/v1/games', config).then(resp=>resp.json()).then(console.log)
   }
 
-  getUserName();
+  // getUserName();
+  pageSetUp();
+  getModal();
 
 
 
@@ -338,7 +392,7 @@ function startScroller(){
 }
 
 function initScroller(){
-
+    console.log('this is init scroller')
     test();
 
     document.getElementById('tag').style.whiteSpace='nowrap'
@@ -404,4 +458,3 @@ function startAction() {
 
 
 })
-

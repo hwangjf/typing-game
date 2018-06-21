@@ -21,13 +21,19 @@ document.addEventListener("DOMContentLoaded", function() {
   let intervalFn;
   let counterKeystroke = 0;
   let correctStrokeCnt = 0;
-  let wpm;
   let txtSize = "20px";
 
-  let timerCount = 100;
+  let totalTime = 30;
+  let timerCount = totalTime;
   let flag = true;
   let user;
   let usersArray = [];
+
+
+  let leftPos = null;
+  let speed=1        // speed of scroller  bound slowest = 30 //  fastest = 1
+  let step=1          // smoothness of movement
+
 
   function requestGames() {
     let h1 = document.createElement('H1')
@@ -90,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (document.getElementById('clock')) {
       document.getElementById('clock').remove();
     }
-    timerCount = 30;
+    timerCount = totalTime;
     displayClock();
 
     initScroller();
@@ -182,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //     startClock(event);
         //     flag = false;
         // }
+        // typingInterval();
         
         counterKeystroke ++;
         startTest(event,displayAcc,pArray);
@@ -196,6 +203,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let index = currentText.length -1;
     //console.log(p)
 
+
     //debugger
     // p[index].innerText === currentText[index]
 
@@ -204,14 +212,20 @@ document.addEventListener("DOMContentLoaded", function() {
     //   p[index].style.color = 'green';
     //   p[index].style.fontSize = '40px';
     //   correctStrokeCnt++;
-    typingInterval();
-
+      typingInterval();
+      if (faster(p[index].offsetLeft)){
+       changeSpeed(true);
+      } else {
+        changeSpeed(false);
+      }
     } 
-    // else {
+    else {
     // //   console.log(`The letter did not matche`)
     //   p[index].style.color = 'red';
     //   p[index].style.fontSize = '40px';
-    // }
+      changeSpeed(false);
+
+    }
 
     correctStrokeCnt = checkTyping(currentText, p);
 
@@ -220,6 +234,27 @@ document.addEventListener("DOMContentLoaded", function() {
     
   }
 
+  function faster(offsetLeft) {
+    // let charWidth = 7.3;
+    let cutOff = 500;
+    let typingPosition = leftPos + offsetLeft;
+    if(leftPos != null){
+      if (typingPosition > cutOff){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function changeSpeed(faster) {
+    if(faster){
+      if(speed >2) speed--;
+    }else{
+      speed ++;
+    }
+    if(speed < 1) speed =1;
+    if(speed > 15) speed = 15;
+  }
 
   function checkTyping(currentText, p) {
       let index =0;
@@ -277,8 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
   /////////////////
 
 
-    var speed=3        // speed of scroller
-    var step=1          // smoothness of movement
+
 
 
     var x, scroll, divW, sText=""
@@ -286,7 +320,8 @@ document.addEventListener("DOMContentLoaded", function() {
 function stopScroller(){clearTimeout(scroll)}
 
 function startScroller(){
-  document.getElementById('tag').style.whiteSpace='nowrap'
+  let tagEle = document.getElementById('tag')
+  tagEle.style.whiteSpace='nowrap'
   var p=document.createElement('p')
   p.id='testP'
   p.style.fontSize='25%' //fix for mozilla. multiply by 4 before using
@@ -297,7 +332,8 @@ function startScroller(){
   pw=p.offsetWidth
   document.body.removeChild(p)
   if (x<(pw*4)*-1){x=divW}
-  document.getElementById('tag').style.left=x+'px'
+  tagEle.style.left=x+'px'
+  leftPos = x;
   scroll=setTimeout(startScroller,speed)
 }
 
@@ -368,3 +404,4 @@ function startAction() {
 
 
 })
+

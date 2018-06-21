@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let h1 = document.createElement('H1')
     h1.innerText = "Leaderboard"
     h1.style.textAlign = "center"
+    h1.style.marginTop = "10px"
 
     leaderBoard.appendChild(h1)
 
@@ -137,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function getModal() {
-    modalDiv.innerHTML = `<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#logInModal" style="position: absolute; right: 0px; width: 120px; margin: 10px; padding: 10px;">
+    modalDiv.innerHTML = `<button type="button" class="btn btn-info" data-toggle="modal" data-target="#logInModal" style="position: absolute; right: 0px; top: 0px; width: 120px; margin: 10px; padding: 10px;">
       ${logInNameSpace}
     </button>
 
@@ -154,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
             Please enter your name: <input id="name-input-field" type="text"
           </div>
           <div class="modal-footer">
-            <button type="button" id="submitName" class="btn btn-secondary" data-dismiss="modal">Submit</button>
+            <button type="button" id="submitName" class="btn btn-info" data-dismiss="modal">Submit</button>
           </div>
         </div>
       </div>

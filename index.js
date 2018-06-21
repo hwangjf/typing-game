@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
   const GAMES_URL = 'http://localhost:3000/api/v1/games'
   const USERS_URL = 'http://localhost:3000/api/v1/users'
-
-
+  const modalDiv = document.getElementById('modal-div')
+  let logInNameSpace = "Log In!";
 
   const oneStepAtTheTime = [
     "A Waterloo Medal was designed by sculptor Benedetto Pistrucci. Commemorating the Battle of Waterloo (18 June 1815), the medal was commissioned by the British Government in 1819 on the instructions of George IV while Prince Regent; copies were to be presented to the victorious generals and to leaders of Britain's allies. The Prince Regent and William Wellesley-Pole, Master of the Mint, had been impressed by Pistrucci's models, and gave him the commission.",
@@ -28,8 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
   let flag = true;
   let user;
   let usersArray = [];
+  let userFlag = true;
 
   function requestGames() {
+    console.log('this is request Games')
     let h1 = document.createElement('H1')
     h1.innerText = "Leaderboard"
 
@@ -61,12 +63,12 @@ document.addEventListener("DOMContentLoaded", function() {
     leaderBoard.appendChild(ol)
   }
 
-  function getUserName() {
-    container.innerHTML += `Please Enter Your Name: <input id="name-input-field" type="text">
-    <button id="name-submit" type="submit">Submit</button>`
-    let submitButton = document.getElementById('name-submit')
-    submitButton.addEventListener('click', userPostRequest)
-  }
+  // function getUserName() {
+  //   // container.innerHTML += `Please Enter Your Name: <input id="name-input-field" type="text">
+  //   // <button id="name-submit" type="submit">Submit</button>`
+  //   // let submitButton = document.getElementById('name-submit')
+  //   // submitButton.addEventListener('click', userPostRequest)
+  // }
 
   function usersGetRequest() {
     return fetch(USERS_URL).then(resp=>resp.json())
@@ -82,6 +84,13 @@ document.addEventListener("DOMContentLoaded", function() {
       body: JSON.stringify({name: nameInput})
     }
     fetch(USERS_URL, config).then(resp=>resp.json()).then(data => user = data).then(pageSetUp)
+    console.log(userFlag)
+    console.log(logInNameSpace)
+    if (userFlag === true) {
+      logInNameSpace = "Change User";
+      userFlag = false;
+      getModal();
+    }
   }
 
   function pageSetUp() {
@@ -100,9 +109,37 @@ document.addEventListener("DOMContentLoaded", function() {
 
     displayText();
     requestGames();
-
     ///////////////
 
+
+  }
+
+  function getModal() {
+    modalDiv.innerHTML = `<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#logInModal" style="position: absolute; right: 0px; width: 120px; margin: 10px; padding: 10px;">
+      ${logInNameSpace}
+    </button>
+
+    <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="ourModalDisplay" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ourModalDisplay">Start Your Engines!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Please enter your name: <input id="name-input-field" type="text"
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            <button type="button" id="submitName" class="btn btn-secondary" data-dismiss="modal">Submit Name</button>
+          </div>
+        </div>
+      </div>
+    </div>`
+    const submitNameButton = document.getElementById('submitName')
+    submitNameButton.addEventListener('click', userPostRequest)
 
   }
 
@@ -121,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function displayClock(){
+    console.log('this is display Clock')
+    let clockContainer = document.getElementById('clock-container')
     let clockDiv = document.createElement("div");
     clockDiv.id = "clock";
     clockDiv.style.backgroundColor = "black";
@@ -133,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
     clockDiv.style.textAlign = "center";
 
     clockDiv.innerText = timerCount;
-    document.body.prepend(clockDiv);
+    clockContainer.prepend(clockDiv);
     // let br = document.createElement('BR')
     // clockDiv.innerHTML += '<br>'
   }
@@ -157,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // container.appendChild(p);
-
+    console.log('this is display Text')
     container.innerHTML += "<br>";
     let inputForm = document.createElement("textarea");
     inputForm.type = 'text';
@@ -166,6 +205,11 @@ document.addEventListener("DOMContentLoaded", function() {
     inputForm.style.fontSize = "20px";
     inputForm.id = "inputTxt";
     container.appendChild(inputForm);
+    if (logInNameSpace === "Log In!") {
+      inputForm.disabled = true;
+    } else {
+      inputForm.disabled = false;
+    }
 
     let displayAcc = document.createElement("div");
     displayAcc.id = "display-accuracy";
@@ -260,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function endOfGameAlert(wordArray) {
     let typingAccuracy = `${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%`
     let wordsPerMin = `${wordArray.length * 2}`
-    container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordsPerMin} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again">Play again?</button></div>`
+    container.innerHTML += `<div><h3>Game over! Your accuracy is ${parseFloat((correctStrokeCnt/counterKeystroke)*100).toFixed(2)}%, and you typed ${wordsPerMin} words per minute. Your score is ${parseInt(typingAccuracy)*parseInt(wordsPerMin)}.</h3><button id="play-again" class="btn btn-secondary">Play again?</button></div>`
 
     let playAgainButton = document.getElementById('play-again')
     playAgainButton.addEventListener('click', pageSetUp)
@@ -274,7 +318,9 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('http://0.0.0.0:3000/api/v1/games', config).then(resp=>resp.json()).then(console.log)
   }
 
-  getUserName();
+  // getUserName();
+  pageSetUp();
+  getModal();
 
 
 
@@ -307,7 +353,7 @@ function startScroller(){
 }
 
 function initScroller(){
-
+    console.log('this is init scroller')
     test();
 
     document.getElementById('tag').style.whiteSpace='nowrap'

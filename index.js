@@ -400,7 +400,7 @@ function initScroller(){
   if (document.getElementById && document.createElement && document.body.appendChild) {
     // addControls();
     divW=document.getElementById('scroller').offsetWidth;
-    x=divW - 150;
+    x=divW - 500;
     document.getElementById('tag').style.position='relative';
     document.getElementById('tag').style.left=divW+'px';
     var ss=document.getElementById('tag').childNodes;

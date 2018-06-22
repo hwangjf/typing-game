@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let leftPos = null;
   let speed=1        // speed of scroller  bound slowest = 30 //  fastest = 1
-  let step=1          // smoothness of movement
+  let step=2          // smoothness of movement
 
 
   function requestGames() {
@@ -399,7 +399,7 @@ function initScroller(){
   if (document.getElementById && document.createElement && document.body.appendChild) {
     // addControls();
     divW=document.getElementById('scroller').offsetWidth;
-    x=divW - 500;
+    x=divW - 700;
     document.getElementById('tag').style.position='relative';
     document.getElementById('tag').style.left=divW+'px';
     var ss=document.getElementById('tag').childNodes;

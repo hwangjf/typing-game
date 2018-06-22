@@ -16,11 +16,11 @@ document.addEventListener("DOMContentLoaded", function() {
     `Steven Paul Jobs was an American entrepreneur and business magnate. He was the chairman, chief executive officer, and a co-founder of Apple Inc., chairman and majority shareholder of Pixar, a member of The Walt Disney Company's board of directors following its acquisition of Pixar, and the founder, chairman, and CEO of NeXT. Jobs and Apple co-founder Steve Wozniak are widely recognized as pioneers of the microcomputer revolution of the 1970s and 1980s.`,
     `Mammals are vertebrate animals characterized by the presence of sweat glands, including milk producing sweat glands, and by the presence of: hair, three middle ear bones used in hearing, and a neocortex region in the brain. Mammals, other than the monotremes, give birth to live young instead of laying eggs. They also possess specialized teeth and use a placenta in the ontogeny. The mammalian brain regulates endothermic and circulatory systems, including a four-chambered heart. Mammals encompass approximately 5,400 species, ranging in size from the Bumblebee Bat, to the Blue Whale, distributed in about 1,200 genera, 153 families, and 29 orders, though this varies by classification scheme.`,
     `Deep Blue was a chess-playing computer developed by IBM. It is known for being the first computer chess-playing system to win both a chess game and a chess match against a reigning world champion under regular time controls. Deep Blue won its first game against a world champion on 10 February 1996, when it defeated Garry Kasparov in game one of a six-game match. However, Kasparov won three and drew two of the following five games, defeating Deep Blue by a score of 4–2. Deep Blue was then heavily upgraded, and played Kasparov again in May 1997. Deep Blue won game six, therefore winning the six-game rematch 3½–2½ and becoming the first computer system to defeat a reigning world champion in a match under standard chess tournament time controls. Kasparov accused IBM of cheating and demanded a rematch. IBM refused and retired Deep Blue.`,
-    `Roger Federer  is a Swiss professional tennis player who is currently ranked world No. 1 in men's singles tennis by the Association of Tennis Professionals. Federer has won 20 Grand Slam singles titles—the most in history for a male player—and has held the world No. 1 spot in the ATP rankings for a record total of 310 weeks, including a record 237 consecutive weeks. After turning professional in 1998, he was continuously ranked in the top ten from October 2002 to November 2016. He re-entered the top ten following his victory at the 2017 Australian Open. Federer has won a record eight Wimbledon titles, a joint-record six Australian Open titles, a record five consecutive US Open titles, and one French Open title. He is one of eight men to have captured a career Grand Slam. Federer has reached a record 30 men's singles Grand Slam finals, including 10 in a row from the 2005 Wimbledon Championships to the 2007 US Open. Federer has also won a record six ATP Finals, 27 ATP World Tour Masters 1000 titles, and a record 20 ATP World Tour 500 titles. Given these achievements, many players and analysts consider Federer the greatest tennis player of all time.`,
+    `Roger Federer is a Swiss professional tennis player who is currently ranked world No. 1 in men's singles tennis by the Association of Tennis Professionals. Federer has won 20 Grand Slam singles titles—the most in history for a male player—and has held the world No. 1 spot in the ATP rankings for a record total of 310 weeks, including a record 237 consecutive weeks. After turning professional in 1998, he was continuously ranked in the top ten from October 2002 to November 2016. He re-entered the top ten following his victory at the 2017 Australian Open. Federer has won a record eight Wimbledon titles, a joint-record six Australian Open titles, a record five consecutive US Open titles, and one French Open title. He is one of eight men to have captured a career Grand Slam. Federer has reached a record 30 men's singles Grand Slam finals, including 10 in a row from the 2005 Wimbledon Championships to the 2007 US Open. Federer has also won a record six ATP Finals, 27 ATP World Tour Masters 1000 titles, and a record 20 ATP World Tour 500 titles. Given these achievements, many players and analysts consider Federer the greatest tennis player of all time.`,
     `Rafael Nadal Parera is a Spanish professional tennis player, currently world No. 2 in men's singles tennis by the Association of Tennis Professionals. Known as "The King of Clay", he is widely regarded as the greatest clay-court player in history. Nadal's evolution into an all-court threat has established him as one of the greatest tennis players of all time. Nadal has won 17 Grand Slam singles titles, a record 32 ATP World Tour Masters 1000 titles, a record 20 ATP World Tour 500 tournaments, and the 2008 Olympic gold medal in singles. In majors, Nadal has won 11 French Open titles, 3 US Open titles, 2 Wimbledon titles, and one Australian Open title. He was also a member of the winning Spain Davis Cup team in 2004, 2008, 2009, and 2011. In 2010, he became the seventh male player in history and youngest of five in the Open Era to achieve the Career Grand Slam at age 24. He is the second male player, after Andre Agassi, to complete the singles Career Golden Slam. In 2011, Nadal was named the Laureus World Sportsman of the Year.`,
     `The Andrea Doria class was a pair of dreadnought battleships built for the Royal Italian Navy during the early 1910s. The two ships, Andrea Doria and Caio Duilio , were completed during World War I. The class was an incremental improvement over the preceding Conte di Cavour class. Like the earlier ships, Andrea Doria and Caio Duilio were armed with a main battery of thirteen 305-millimeter guns. The two ships were based in southern Italy during World War I to help ensure that the Austro-Hungarian Navy surface fleet would be contained in the Adriatic. Neither vessel saw any combat during the conflict. After the war, they cruised the Mediterranean and were involved in several international incidents, including at Corfu in 1923. In 1933, both ships were placed in reserve. In 1937 the ships began a lengthy reconstruction. The modifications included removing their center main battery turret and boring out the rest of the guns to 320 mm, strengthening their armor protection, installing new boilers and steam turbines, and lengthening their hulls. The reconstruction work lasted until 1940, by which time Italy was already engaged in World War II.`,
     `Thomas Edison 1847-1931 Thomas Edison was born on 11 February 1847. He was one of the outstanding geniuses of technology and he obtained patents for more than one thousand inventions including the electric light bulb, the record player and an early type of film projector. He also created the world's first industrial research laboratory. He was born in Milan, Ohio and he was always an inquisitive boy. By the time he was 10 he had set up a small chemical laboratory in his house after his mother had shown him a science book. He soon became fascinated with electrical currents and it remained the main interest of his life. In 1869, he borrowed a small amount of money and became a freelance inventor. In the same summer, there was a crisis in the New York financial district called Wall Street when the new telegraphic gold-price indicator broke down. Edison was called in to repair it and he did it so well that he was given a job as supervisor with the Western Union Telegraph Company. They later commissioned him to improve the Wall Street stock ticker that was just coming into use. He did so and produced the Edison Universal Stock Printer, which immediately brought him a fortune of $40,000. With this money, he set up as a manufacturer in order to produce electrical machines.`,
-    `Galileo Galilei  was an Italian polymath. Galileo is a central figure in the transition from natural philosophy to modern science and in the transformation of the scientific Renaissance into a scientific revolution. Galileo's championing of heliocentrism and Copernicanism was controversial during his lifetime, when most subscribed to either geocentrism or the Tychonic system. He met with opposition from astronomers, who doubted heliocentrism because of the absence of an observed stellar parallax. The matter was investigated by the Roman Inquisition in 1615, which concluded that heliocentrism was "foolish and absurd in philosophy, and formally heretical since it explicitly contradicts in many places the sense of Holy Scripture." Galileo later defended his views in Dialogue Concerning the Two Chief World Systems (1632), which appeared to attack Pope Urban VIII and thus alienated him and the Jesuits, who had both supported Galileo up until this point. He was tried by the Inquisition, found "vehemently suspect of heresy", and forced to recant. He spent the rest of his life under house arrest. While under house arrest, he wrote one of his best-known works, Two New Sciences, in which he summarized work he had done some forty years earlier on the two sciences now called kinematics and strength of materials.`,
+    `Galileo Galilei was an Italian polymath. Galileo is a central figure in the transition from natural philosophy to modern science and in the transformation of the scientific Renaissance into a scientific revolution. Galileo's championing of heliocentrism and Copernicanism was controversial during his lifetime, when most subscribed to either geocentrism or the Tychonic system. He met with opposition from astronomers, who doubted heliocentrism because of the absence of an observed stellar parallax. The matter was investigated by the Roman Inquisition in 1615, which concluded that heliocentrism was "foolish and absurd in philosophy, and formally heretical since it explicitly contradicts in many places the sense of Holy Scripture." Galileo later defended his views in Dialogue Concerning the Two Chief World Systems (1632), which appeared to attack Pope Urban VIII and thus alienated him and the Jesuits, who had both supported Galileo up until this point. He was tried by the Inquisition, found "vehemently suspect of heresy", and forced to recant. He spent the rest of his life under house arrest. While under house arrest, he wrote one of his best-known works, Two New Sciences, in which he summarized work he had done some forty years earlier on the two sciences now called kinematics and strength of materials.`,
     `Ernest Miller Hemingway was an American novelist, short story writer, and journalist. His economical and understated style, which he termed the Iceberg Theory, had a strong influence on 20th-century fiction, while his adventurous lifestyle and his public image brought him admiration from later generations. Hemingway produced most of his work between the mid-1920s and the mid-1950s, and won the Nobel Prize in Literature in 1954. He published seven novels, six short-story collections, and two non-fiction works. Three of his novels, four short story collections, and three non-fiction works were published posthumously. Many of his works are considered classics of American literature. Hemingway was raised in Oak Park, Illinois. After high school, he reported for a few months for The Kansas City Star, before leaving for the Italian Front to enlist as an ambulance driver in World War I. In 1918, he was seriously wounded and returned home. His wartime experiences formed the basis for his novel A Farewell to Arms (1929).`
   ]
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let leftPos = null;
   let speed=1        // speed of scroller  bound slowest = 30 //  fastest = 1
-  let step=1          // smoothness of movement
+  let step=2          // smoothness of movement
 
 
   function requestGames() {
@@ -125,9 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
     mySound = new sound("sounds/tw_sound.mp3");
 
     displayClock();
-
     initScroller();
-
     displayText();
     requestGames();
     ///////////////
@@ -244,8 +242,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let index = currentText.length -1;
 
+
     if (p[index].innerText === currentText[index]){
-      typingInterval();
+      if(!atTheEdge(p[index].offsetLeft)){typingInterval();}
+      
       if (faster(p[index].offsetLeft)){
        changeSpeed(true);
       } else {
@@ -264,6 +264,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     displayAcc.innerText = `Accuracy: ${thisAccuracy}%`;
 
+  }
+
+  function atTheEdge(offset) {
+    if(offset+leftPos < 100){return true;}
+    return false;
   }
 
   function faster(offsetLeft) {
@@ -355,10 +360,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /////////////////
 
-
-
-
-
     var x, scroll, divW, sText=""
 
 function stopScroller(){clearTimeout(scroll)}
@@ -398,8 +399,6 @@ function initScroller(){
     for (i=0;i<ss.length;i++) {sText+=ss[i].nodeValue+" "};
     // scroll=setTimeout('startScroller()',speed);
     typingInterval();
-
-
   }
 }
 

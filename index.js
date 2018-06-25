@@ -35,18 +35,18 @@ document.addEventListener("DOMContentLoaded", function() {
   let totalTime = 30;
   let timerCount = totalTime;
   let flag = true;
-  let user;
+  let user ;
   let usersArray = [];
   let userFlag = true;
 
 
   let leftPos = null;
   let speed=1        // speed of scroller  bound slowest = 30 //  fastest = 1
-  let step=2          // smoothness of movement
+  let step=1          // smoothness of movement
 
 
   function requestGames() {
-    console.log('this is request Games')
+    // console.log('this is request Games')
     let h1 = document.createElement('H1')
     h1.innerText = "Leaderboard"
     h1.style.textAlign = "center"
@@ -98,9 +98,9 @@ document.addEventListener("DOMContentLoaded", function() {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({name: nameInput})
     }
-    fetch(USERS_URL, config).then(resp=>resp.json()).then(data => user = data).then(pageSetUp)
-    console.log(userFlag)
-    console.log(logInNameSpace)
+    // fetch(USERS_URL, config).then(resp=>resp.json()).then(data => user = data).then(pageSetUp)
+    // console.log(userFlag)
+    // console.log(logInNameSpace)
     if (userFlag === true) {
       logInNameSpace = "Change User";
       userFlag = false;
@@ -127,7 +127,8 @@ document.addEventListener("DOMContentLoaded", function() {
     displayClock();
     initScroller();
     displayText();
-    requestGames();
+    console.log("end of displaytext")
+    // requestGames();
     ///////////////
 
 
@@ -205,13 +206,13 @@ document.addEventListener("DOMContentLoaded", function() {
     inputForm.style.fontSize = "20px";
     inputForm.id = "inputTxt";
     container.appendChild(inputForm);
-    if (logInNameSpace === "Log In!") {
-      inputForm.disabled = true;
-      inputForm.placeholder = "Please log in."
-    } else {
-      inputForm.disabled = false;
-      inputForm.placeholder = "Start typing here!"
-    }
+    // if (logInNameSpace === "Log In!") {
+    //   inputForm.disabled = true;
+    //   inputForm.placeholder = "Please log in."
+    // } else {
+    //   inputForm.disabled = false;
+    //   inputForm.placeholder = "Start typing here!"
+    // }
 
 
     let displayAcc = document.createElement("div");
@@ -332,13 +333,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let playAgainButton = document.getElementById('play-again')
     playAgainButton.addEventListener('click', pageSetUp)
 
-    let config = {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({accuracy: typingAccuracy, wpm: wordsPerMin, user_id: user.id})
-    }
+    // let config = {
+    //   method: "POST",
+    //   headers: {"Content-Type": "application/json"},
+    //   body: JSON.stringify({accuracy: typingAccuracy, wpm: wordsPerMin, user_id: user.id})
+    // }
 
-    fetch('http://0.0.0.0:3000/api/v1/games', config)
+    // fetch('http://0.0.0.0:3000/api/v1/games', config)
   }
 
   function sound(src) {
@@ -356,7 +357,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 }
   pageSetUp();
-  getModal();
+  // getModal();
 
   /////////////////
 
@@ -379,12 +380,15 @@ function startScroller(){
   if (x<(pw*4)*-1){x=divW}
   tagEle.style.left=x+'px'
   leftPos = x;
+  console.log(leftPos)
+
   scroll=setTimeout(startScroller,speed)
 }
 
+var bbb = 0;
 function initScroller(){
-    console.log('this is init scroller')
-    test();
+    console.log('this is init scroller' + bbb++)
+    addText();
 
     document.getElementById('tag').style.whiteSpace='nowrap'
 
@@ -403,7 +407,7 @@ function initScroller(){
 }
 
 
-function test(){
+function addText(){
     let text = oneStepAtTheTime[Math.floor(Math.random()*oneStepAtTheTime.length)];
     let pTag = document.createElement('p');
     let scrollerDiv = document.createElement('div');

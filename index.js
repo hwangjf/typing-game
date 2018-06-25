@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     if (p[index].innerText === currentText[index]){
-      if(!atTheEdge(p[index].offsetLeft)){typingInterval();}
+      if(!atTheEdge(p[index].offsetLeft)){typingInterval(10);}
       
       if (faster(p[index].offsetLeft)){
        changeSpeed(true);
@@ -377,7 +377,7 @@ function startScroller(){
   document.body.appendChild(p)
   pw=p.offsetWidth
   document.body.removeChild(p)
-  if (x<(pw*4)*-1){x=divW}
+  // if (x<(pw*4)*-1){x=divW}
   tagEle.style.left=x+'px'
   leftPos = x;
   console.log(leftPos)
@@ -437,7 +437,11 @@ function addText(){
 let startOrStop = true;
 
 //moving the line longer or shorter
-function typingInterval(){
+function typingInterval(time = 0){
+
+  // for(let i = 0; i < time; i++){
+  //   scroll=setTimeout(startScroller,speed)
+  // }
     setTimeout(startAction, 10); //start the scrolling
     setTimeout(startAction, 400); // stop the scrolling
 }
